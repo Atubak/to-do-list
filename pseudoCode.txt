@@ -24,9 +24,9 @@ SET projectFactoryFunction (name)
     SET nameProperty
     SET itemArray
     
-    SET changeNameFunction (newName)
+    SET changeNameFunction ()
         SET assign newName to nameProperty
-        CALL someFunctionThatReloadsTheProjectObjectInTheDom !!!!!!
+        CALL someFunctionThatReloadsTheProjectObjectInTheDom !!!!!! (or should this be in an interface function???)
     
     SET addItemFunction 
         CALL toDoObjectFactory returning newToDoObject
@@ -42,7 +42,7 @@ RETURN {name, [itemArray]}
 
     
 
-SET toDoObjectFactory (title, description, dueDate, priority)
+SET toDoObjectFactory ()
     SET titleProperty
     SET descriptionProperty
     SET dueDateProperty
@@ -52,7 +52,7 @@ SET toDoObjectFactory (title, description, dueDate, priority)
         SET assign newTitle to titleProperty
         CALL someFunctionThatReloadsTheTODOInTheDom !!!!
 
-    SET changeDescriptionFunction
+    SET changeDescriptionFunction(newDescr)
         SET assign newDescr to descriptionProperty
         CALL someFunctionThatReloadsTheTODOInTheDom !!!!
     
