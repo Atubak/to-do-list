@@ -1,0 +1,78 @@
+// items on the to do list are objects
+//     with title, description, dueDate, priority as properties 
+
+// items are grouped inside of "projects", lists of items
+//     page starts with a default project to put items in
+
+// SEPARATE application logic: creating new todos, setting todos as complete, changing todo priority etc.
+//     all in their own modules(js files)
+
+// There should be a user interface that can:
+//     view all projects
+//     (pre)view all todos in each project: title and due dueDate
+//     expand a single todo item to edit or see details
+//     delete a todo item 
+
+
+
+
+
+start with empty page
+
+SET projectFactoryFunction (name)
+    
+    SET nameProperty
+    SET itemArray
+    
+    SET changeNameFunction (newName)
+        SET assign newName to nameProperty
+        CALL someFunctionThatReloadsTheProjectObjectInTheDom !!!!!!
+    
+    SET addItemFunction 
+        CALL toDoObjectFactory returning newToDoObject
+        ADD newToDoObject to itemArray
+        CALL someFunctionThatReloadsTheProjectObjectInTheDom !!!!!!
+    
+    SET removeItemFunction(itemToBeRemoved)
+        GET itemToBeRemoved[index] in itemArray
+        CALL splice method to remove itemToBeRemoved
+        CALL someFunctionThatReloadsTheProjectObjectInTheDom !!!!!
+
+RETURN {name, [itemArray]}
+
+    
+
+SET toDoObjectFactory (title, description, dueDate, priority)
+    SET titleProperty
+    SET descriptionProperty
+    SET dueDateProperty
+    SET priority
+
+    SET changeTitleFunction(newTitle)
+        SET assign newTitle to titleProperty
+        CALL someFunctionThatReloadsTheTODOInTheDom !!!!
+
+    SET changeDescriptionFunction
+        SET assign newDescr to descriptionProperty
+        CALL someFunctionThatReloadsTheTODOInTheDom !!!!
+    
+    SET changeDueDateFunction(newDate)
+        SET assign newDate to dueDateProperty
+        CALL someFunctionThatReloadsTheTODOInTheDom !!!!
+
+    SET changePriorityFunction(newPriority)
+        SET assign newPriority to priority
+        CALL someFunctionThatReloadsTheTODOInTheDom !!!!
+
+RETURN {title, description, dueDATE, priority}
+
+
+
+hard code project name for now
+GET projectName
+
+
+SET HTML elements 
+
+
+final result: SHOW default project with option to switch/make a new one/see details of todo's/delete todo/edit todo/delete project/set priority/write description/edit due date
