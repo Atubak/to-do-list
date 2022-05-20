@@ -3,12 +3,12 @@ export const ProjectFactory = (projectName) => {
     let toDoItems = [];
 
     function changeName(newName) {
-        return this.name = newName;
+        this.name = newName;
         // reloadProjectObjectInDom()
     }
 
     function addItem(newItemObject) {
-        return this.toDoItems.push(newItemObject);
+        this.toDoItems.push(newItemObject);
         // reloadProjectObjectInDom()
     }
 

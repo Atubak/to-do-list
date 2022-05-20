@@ -1,5 +1,5 @@
 import "./style.css";
-import { projectManager } from "./projectManager";
+import { projectList } from "./projectManager";
 import { ProjectFactory } from "./projectObject";
 import { ToDoObjectFactory } from "./toDoObject";
 
@@ -8,6 +8,12 @@ import { ToDoObjectFactory } from "./toDoObject";
 
 
 
-projectManager.add(ProjectFactory("jona"));
+projectList.add(ProjectFactory("jona"));
+projectList.add(ProjectFactory("booba"));
+projectList.add(ProjectFactory("vegana"));
 
-console.log(projectManager);
+projectList.list[0].addItem(ToDoObjectFactory());
+projectList.list[0].addItem(ToDoObjectFactory());
+projectList.list[0].removeItem(0);
+
+console.log(projectList);
