@@ -1,4 +1,5 @@
 export const ToDoObjectFactory = () => {
+    let done = false;
     let title = "Untitled";
     let description = "Empty";
     let dueDate;
@@ -24,5 +25,5 @@ export const ToDoObjectFactory = () => {
         // reloadItemObjectInDom()
     }
 
-    return {title, description, dueDate, priority, changeTitle, changeDescription, changeDueDate, changePriority};
+    return {done, title, description, dueDate, priority, changeTitle, changeDescription, changeDueDate, changePriority};
 };
