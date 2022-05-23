@@ -19,13 +19,37 @@ import { ToDoObjectFactory } from "./toDoObject";
 // console.log(projectList);
 
 function HtmlLoader() {
-const body = document.querySelector("body");
-body.innerHTML = `
-<header>
-  <div id="logo">𝕋</div>
-  <div id="title">To Do List</div>
-  <div id="plus">+</div>
-</header>`;
+    const body = document.querySelector("body");
+    body.innerHTML = `
+    <header>
+        <div id="logo">𝕋</div>
+        <div id="title">To Do List</div>
+        <div id="plus">+</div>
+    </header>
+
+    <div id="navigation">
+      <div id="today" class="list">Today</div>
+      </br>
+      <div id="week" class="list">This Week</div>
+      </br>
+
+      <div id="listContainer">
+      
+        <p>Projects</p>
+      
+        <div id="lists">
+          <div class="list">Untitled</div>
+        </div>
+        </br>
+        <div id="addProject" class="list">+ New Project</div>
+      </div>
+      
+    </div>
+
+    `;
+
+    
+
 };
 
 HtmlLoader();
