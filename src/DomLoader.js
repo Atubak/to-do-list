@@ -30,7 +30,7 @@ function initialDomLoader() {
     `;
 };
 
-function fillProjects(projectListArray) {
+function fillProjects(projectListArray) {   //populates custom projects in nav bar
     const container = document.querySelector("#lists");
     
     projectListArray.forEach(e => {
@@ -45,39 +45,48 @@ function fillProjects(projectListArray) {
     })
 };
 
-function projectNameSelector(projectName) {
+function projectNameSelector(projectName) {     //highlights the project in the nav bar
     const selectedElement = document.getElementById(projectName);
     selectedElement.classList.add(`selected`);
 };
 
+function fillProjectH1(projectName) {   //insert the project title
+    const name = document.createElement("h1");
+    name.textContent = projectName;
+    return name;
+};
+
+
+function fillItemContainer(itemArray) { //creates a div to put the to do item in
+    const div = document.createElement("div");
+    div.id = "itemContainer";
+    console.log(itemArray);
+
+    itemArray.forEach(e => {
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("toDoItem");
+        itemDiv.innerHTML = `
+            <input type="checkbox" ${e.done == true ? "checked" : ""}>
+            <div>${e.title}</div>
+            <div class="iButton">ⓘ</div>
+            
+        `;
+        div.appendChild(itemDiv);
+    });
+    return div;
+};
+
+
+
 function fillContent(project) {
     projectNameSelector(project.name);
-
-    const container = document.getElementById("currentProject");
-
-    const name = document.createElement("h1");
-    name.textContent = project.name;
-
-
-    const itemContainer = document.createElement("div");
     
-    project.toDoItems.forEach(e => {
-        console.log(e);
-        const div = document.createElement("div");
-        div.innerHTML = `
-            <div class="toDoItem">
-            <input type="checkbox">
-            ${e.title}
+    const currentProjectDiv = document.getElementById("currentProject");
+    const nameDiv = fillProjectH1(project.name);
+    const itemContainerDiv = fillItemContainer(project.toDoItems);
 
-            
-            </div>
-        `;
-        
-        itemContainer.appendChild(div);
-    });
-    
-    container.appendChild(name);
-    container.appendChild(itemContainer);
+    currentProjectDiv.appendChild(nameDiv);
+    currentProjectDiv.appendChild(itemContainerDiv);    
 };
 
 export {initialDomLoader, fillProjects, fillContent};

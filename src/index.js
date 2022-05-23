@@ -15,7 +15,10 @@ projectList.add(ProjectFactory("work"));
 
 projectList.list[0].addItem(ToDoObjectFactory());
 projectList.list[0].addItem(ToDoObjectFactory());
-projectList.list[0].removeItem(0);
+projectList.list[0].addItem(ToDoObjectFactory());
+projectList.list[0].addItem(ToDoObjectFactory());
+projectList.list[0].addItem(ToDoObjectFactory());
+projectList.list[0].addItem(ToDoObjectFactory());
 
 console.log(projectList);
 

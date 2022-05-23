@@ -62,8 +62,11 @@ p {
 }
 
 .list {
-    padding: 0px 7px;
-    border-radius: 10px;
+    padding: 5px 7px;
+    border-radius: 6px;
+    border-bottom: solid;
+    border-width: 2px;
+    border-color: hsl(0, 0%, 55%);
 }
 
 .list:hover {
@@ -75,4 +78,26 @@ p {
 .list.selected {
     background-color: hsl(0, 0%, 55%);
     color: white;  
+}
+
+
+
+/* current project section */
+
+#currentProject {
+    flex: 1 1 auto;
+    background-color: aquamarine;
+}
+
+#itemContainer {
+    
+}
+
+.toDoItem {
+    display: flex;
+    background-color: hsl(28, 87%, 87%);
+}
+
+.iButton {
+    margin-top: -5px;
 }
