@@ -1,3 +1,23 @@
-.text {
-    color: white;
+body {
+    color: black;
+    margin: 0%;
+}
+
+header {
+    display: flex;
+    padding: 10px 5%;
+    justify-content: space-between;
+    background-color: hsl(28, 87%, 87%);
+    user-select: none;
+}
+
+#logo, #plus {
+    background-color: hsl(28, 87%, 67%);
+    width: 25px;
+    text-align: center;
+    border-radius: 30%;
+}
+
+#plus:hover {
+    background-color: white;
 }
