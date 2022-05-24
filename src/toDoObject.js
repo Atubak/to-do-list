@@ -1,12 +1,12 @@
-export const ToDoObjectFactory = () => {
+export const ToDoObjectFactory = (itemName)=> {
     let done = false;
-    let title = "Untitled";
+    let name = itemName;
     let description = "Empty";
     let dueDate;
-    let priority;
+    let priority = "low";
 
-    function changeTitle(newTitle) {
-        return this.title = newTitle;
+    function changeName(newTitle) {
+        return this.name = newTitle;
         // reloadItemObjectInDom()
     }
 
@@ -25,5 +25,5 @@ export const ToDoObjectFactory = () => {
         // reloadItemObjectInDom()
     }
 
-    return {done, title, description, dueDate, priority, changeTitle, changeDescription, changeDueDate, changePriority};
+    return {done, name, description, dueDate, priority, changeName, changeDescription, changeDueDate, changePriority};
 };

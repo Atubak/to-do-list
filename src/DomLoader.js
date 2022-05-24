@@ -9,18 +9,16 @@ function initialDomLoader() {
 
     <div id="content">
         <div id="navigation">
-        <div id="Today" class="list">Today</div>
-        </br>
-        <div id="This Week" class="list">This Week</div>
-        </br>
-
+        
         <div id="listContainer">
         
             <p>Projects</p>
         
-            <div id="lists"></div>
+            <div id="lists">
+            
             </br>
             <div id="addProject" class="list">+ New Project</div>
+            </div>
         </div>
         
         </div>
@@ -30,24 +28,29 @@ function initialDomLoader() {
     `;
 };
 
-function fillProjects(projectListArray) {   //populates custom projects in nav bar
+function fillCustomProjects(projectListArray) {   //populates custom projects in nav bar
     const container = document.querySelector("#lists");
+    container.innerHTML = `</br>
+        <div id="addProject" class="list">+ New Project</div>`;
     
     projectListArray.forEach(e => {
         const div = document.createElement("div");
         div.classList.add('list');
         div.id = e.name;
         div.textContent = e.name;
-        container.appendChild(div);
+        container.insertBefore(div, container.lastElementChild);
         
         const br = document.createElement("br");
         div.insertAdjacentElement("afterend", br);
     })
 };
 
+
+// some functions that get called by fillcontent()
+
 function projectNameSelector(projectName) {     //highlights the project in the nav bar
     const selectedElement = document.getElementById(projectName);
-    selectedElement.classList.add(`selected`);
+    selectedElement.classList.add("selected");
 };
 
 function fillProjectH1(projectName) {   //insert the project title
@@ -60,33 +63,71 @@ function fillProjectH1(projectName) {   //insert the project title
 function fillItemContainer(itemArray) { //creates a div to put the to do item in
     const div = document.createElement("div");
     div.id = "itemContainer";
-    console.log(itemArray);
+
+    const addItemDiv = document.createElement("div");
+    addItemDiv.classList.add("addItem");
+    addItemDiv.textContent = "+ item";
 
     itemArray.forEach(e => {
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("toDoItem");
+        itemDiv.classList.add(e.priority);
         itemDiv.innerHTML = `
             <input type="checkbox" ${e.done == true ? "checked" : ""}>
-            <div>${e.title}</div>
-            <div class="iButton">ⓘ</div>
-            
+            <div class="itemTitle">${e.name}</div>
+            <div class="infoAndRemove">
+                <div class="iButton">ⓘ</div>
+                <div class="removeButton">❌</div>
+            </div>            
         `;
         div.appendChild(itemDiv);
     });
+
+    div.appendChild(addItemDiv);
+    
     return div;
 };
 
 
 
-function fillContent(project) {
-    projectNameSelector(project.name);
+function fillContent(project) {     //combines 
     
     const currentProjectDiv = document.getElementById("currentProject");
+    currentProjectDiv.innerHTML = "";
     const nameDiv = fillProjectH1(project.name);
     const itemContainerDiv = fillItemContainer(project.toDoItems);
-
+    
     currentProjectDiv.appendChild(nameDiv);
     currentProjectDiv.appendChild(itemContainerDiv);    
+    
+    
+    projectNameSelector(project.name);
 };
 
-export {initialDomLoader, fillProjects, fillContent};
+
+
+
+
+function removeHighLight(navbarProjectDiv) {     //removes navbar highlight
+    navbarProjectDiv[0].classList.remove("selected");
+};
+
+
+
+function addNewProjectPopUp() {
+    const name = prompt("fill in name");
+    return name;
+};
+
+function addNewItemName() {
+    const name = prompt("fill in name");
+    return name;
+}
+
+function toggleNav() {
+    const nav = document.getElementById("content").firstElementChild;
+    nav.id === "navigation" ? nav.id = "navToggle" : nav.id = "navigation";
+    
+};
+
+export {initialDomLoader, fillCustomProjects, fillContent, removeHighLight, addNewProjectPopUp, addNewItemName, toggleNav};

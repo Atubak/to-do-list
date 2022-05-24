@@ -21,9 +21,13 @@ header {
     border-radius: 30%;
 }
 
-#plus:hover {
-    background-color: white;
+#plus:hover, #logo:hover {
+    background-color: hsl(28, 87%, 47%);
     cursor: pointer;
+}
+
+#plus:active, #logo:active {
+    transform: translateY(3px);
 }
 
 /* content section */
@@ -41,6 +45,13 @@ header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    box-shadow: 5px 0px 5px hsl(0, 0%, 55%);
+}
+
+#navToggle {
+    transform: scale(0.1, 0.1);
+    position: absolute;
+    left: -100px;
 }
 
 
@@ -48,7 +59,7 @@ header {
     color:hsl(0, 0%, 55%);
 }
 
-p {
+#listContainer > p {
     display: block;
     margin: 0px -20px;
 }
@@ -63,21 +74,39 @@ p {
 
 .list {
     padding: 5px 7px;
-    border-radius: 6px;
     border-bottom: solid;
-    border-width: 2px;
+    border-width: 1px;
     border-color: hsl(0, 0%, 55%);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 150px;
+}
+
+#addProject {
+    color: hsl(0, 0%, 55%);
+}
+
+#addProject:hover {
+    color: white;
 }
 
 .list:hover {
     background-color: hsl(0, 0%, 55%);
     color: white;
     cursor: pointer;
+    border-radius: 6px;
+}
+
+.list:active {
+    transform: translateY(3px);
 }
 
 .list.selected {
     background-color: hsl(0, 0%, 55%);
     color: white;  
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px hsl(0, 0%, 55%);
 }
 
 
@@ -86,18 +115,63 @@ p {
 
 #currentProject {
     flex: 1 1 auto;
-    background-color: aquamarine;
+    margin-left: 5%;
+    margin-top: 50px;
 }
 
 #itemContainer {
-    
+    padding: 5% 5% 5% 0%;
 }
 
-.toDoItem {
+.toDoItem, .addItem {
     display: flex;
+    background-color: hsl(28, 87%, 87%);
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 7px;
+}
+
+.toDoItem.high {
+    background-color: hsl(28, 87%, 47%);
+}
+
+.toDoItem.mid {
+    background-color: hsl(28, 87%, 67%);    
+}
+
+.toDoItem.low {
     background-color: hsl(28, 87%, 87%);
 }
 
+.itemTitle {
+    color: hsl(0, 0%, 25%);
+}
+
+.infoAndRemove {
+    display: flex;
+    gap: 5px;
+}
+
 .iButton {
-    margin-top: -5px;
+    margin-top: -2px;
+}
+
+.removeButton {
+    margin-top: 2px;
+}
+
+.addItem {
+    width: 45px;
+    user-select: none;
+}
+
+.addItem:hover {
+    cursor: pointer;
+    background-color: hsl(28, 87%, 47%);
+    color: white;
+}
+
+.addItem:active {
+    transform: translateY(3px);
 }
