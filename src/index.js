@@ -2,7 +2,7 @@ import "./style.css";
 import { projectList } from "./projectManager";
 import { ProjectFactory } from "./projectObject";
 import { ToDoObjectFactory } from "./toDoObject";
-import {initialDomLoader, fillCustomProjects, fillContent, addNewProjectPopUp, addNewItemName, removeHighLight, toggleNav} from "./DomLoader";
+import {initialDomLoader, fillCustomProjects, fillContent, addNewProjectPopUp, addNewItemName, removeHighLight, toggleNav, openItemDetails} from "./DomLoader";
 import {findProject} from "./EventListeners";
 
 
@@ -83,6 +83,23 @@ function delegateClick(e) {
 
         project.removeItem(itemToBeRemoved);
         return fillContent(project);
+    };
+
+    if (e.target.classList[0] === "iButton") {  //if clicked on info button
+        const projectName = document.querySelector("h1").textContent;
+        const project = findProject(projectList.list, projectName);
+        
+        const itemDiv = e.target.parentElement.parentElement.parentElement;
+        const itemToBeExpanded = findProject(project.toDoItems, itemDiv.getElementsByClassName("itemTitle")[0].textContent);
+        
+        
+        // console.log(itemDiv);
+        
+        openItemDetails(itemDiv, itemToBeExpanded);
+        
+        // console.log(itemDiv, itemToBeExpanded);
+
+        
     };
 
 };

@@ -124,12 +124,15 @@ header {
 }
 
 .toDoItem, .addItem {
-    display: flex;
     background-color: hsl(28, 87%, 87%);
-    justify-content: space-between;
     margin: 5px;
     padding: 5px 10px;
     border-radius: 7px;
+}
+
+.generalInfo {
+    display: flex;
+    justify-content: space-between;
 }
 
 .toDoItem.high {
@@ -174,4 +177,9 @@ header {
 
 .addItem:active {
     transform: translateY(3px);
+}
+
+#details {
+    background-color: hsl(28, 87%, 97%);
+    display: block;
 }

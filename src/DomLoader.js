@@ -73,12 +73,14 @@ function fillItemContainer(itemArray) { //creates a div to put the to do item in
         itemDiv.classList.add("toDoItem");
         itemDiv.classList.add(e.priority);
         itemDiv.innerHTML = `
-            <input type="checkbox" ${e.done == true ? "checked" : ""}>
-            <div class="itemTitle">${e.name}</div>
-            <div class="infoAndRemove">
-                <div class="iButton">ⓘ</div>
-                <div class="removeButton">❌</div>
-            </div>            
+            <div class="generalInfo">
+                <input type="checkbox" ${e.done == true ? "checked" : ""}>
+                <div class="itemTitle">${e.name}</div>
+                <div class="infoAndRemove">
+                    <div class="iButton">ⓘ</div>
+                    <div class="removeButton">❌</div>
+                </div>            
+            </div>
         `;
         div.appendChild(itemDiv);
     });
@@ -130,4 +132,34 @@ function toggleNav() {
     
 };
 
-export {initialDomLoader, fillCustomProjects, fillContent, removeHighLight, addNewProjectPopUp, addNewItemName, toggleNav};
+
+function openItemDetails(itemDivToOpen, itemObject) {
+    
+    if (itemDivToOpen.classList.contains("expanded")) {
+        itemDivToOpen.removeChild(itemDivToOpen.lastElementChild);
+        itemDivToOpen.classList.toggle("expanded");
+    } else {
+    const detailDiv = document.createElement("div");
+    detailDiv.id = "details";
+    itemDivToOpen.classList.add("expanded");
+    detailDiv.innerHTML = `
+        <input type="text" id="description" placeholder="Description: ${itemObject.description}"> </br>
+        <label for="dueDate">Complete Before:</label>
+        <input type="date" id="dueDate" ${itemObject.dueDate}></br>
+        <label for="priority">Priority</label>
+        <select id="priority">
+            <option value="mid">Mid</option>
+            <option value="low">Low</option>
+            <option value="high">High</option>
+        </select>
+    `;
+
+    itemDivToOpen.appendChild(detailDiv);
+    
+    document.getElementById("priority").value = itemObject.priority; 
+
+    };
+
+};
+
+export {initialDomLoader, fillCustomProjects, fillContent, removeHighLight, addNewProjectPopUp, addNewItemName, toggleNav, openItemDetails};
