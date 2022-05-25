@@ -69,7 +69,7 @@ function delegateClick(e) {
         const project = findProject(projectList.list, projectName);
         const itemName = addNewItemName();
         if (!itemName) return;
-        project.addItem(ToDoObjectFactory(itemName));
+        project.addItem(ToDoObjectFactory(itemName)); 
         console.log(project);
         return fillContent(project);
     };
@@ -97,10 +97,10 @@ function delegateClick(e) {
         
         openItemDetails(itemDiv, itemToBeExpanded);
         
-        // console.log(itemDiv, itemToBeExpanded);
-
-        
     };
 
 };
+
+
+
 

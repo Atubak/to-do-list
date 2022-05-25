@@ -1,7 +1,7 @@
 export const ToDoObjectFactory = (itemName)=> {
     let done = false;
     let name = itemName;
-    let description = "Empty";
+    let description = "";
     let dueDate;
     let priority = "low";
 

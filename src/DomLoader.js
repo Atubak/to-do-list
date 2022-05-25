@@ -133,33 +133,81 @@ function toggleNav() {
 };
 
 
-function openItemDetails(itemDivToOpen, itemObject) {
-    
-    if (itemDivToOpen.classList.contains("expanded")) {
-        itemDivToOpen.removeChild(itemDivToOpen.lastElementChild);
-        itemDivToOpen.classList.toggle("expanded");
-    } else {
+function closeItemDetails(itemDiv) {
+    itemDiv.removeChild(itemDiv.lastElementChild);
+    itemDiv.classList.toggle("expanded");
+};
+
+function closeOtherItemDetails() {
+    if (document.getElementsByClassName("expanded").length >= 1) {      //close any other item details section
+        const alreadyExp = document.getElementsByClassName("expanded")[0];
+        alreadyExp.classList.remove("expanded");
+        alreadyExp.removeChild(alreadyExp.lastElementChild);
+    }
+};
+
+
+
+function populateItemDetails(itemDiv, itemObject) {
+
+    closeOtherItemDetails();
+
+    itemDiv.classList.add("expanded");
+
     const detailDiv = document.createElement("div");
     detailDiv.id = "details";
-    itemDivToOpen.classList.add("expanded");
     detailDiv.innerHTML = `
-        <input type="text" id="description" placeholder="Description: ${itemObject.description}"> </br>
+        <input type="text" id="description" placeholder="Description:" value="${itemObject.description}"></br>
         <label for="dueDate">Complete Before:</label>
-        <input type="date" id="dueDate" ${itemObject.dueDate}></br>
+        <input type="date" id="dueDate" value="${itemObject.dueDate}"></br>
         <label for="priority">Priority</label>
         <select id="priority">
-            <option value="mid">Mid</option>
             <option value="low">Low</option>
+            <option value="mid">Mid</option>
             <option value="high">High</option>
         </select>
     `;
-
-    itemDivToOpen.appendChild(detailDiv);
+    itemDiv.appendChild(detailDiv);
     
     document.getElementById("priority").value = itemObject.priority; 
+    changeListener(itemDiv, itemObject);
+};
 
+
+
+function openItemDetails(itemDivToOpen, itemObject) {
+    if (itemDivToOpen.classList.contains("expanded")) {      //if it's already expanded, close it
+        closeItemDetails(itemDivToOpen);
+    } else {                                                 //populate the details section
+        populateItemDetails(itemDivToOpen, itemObject);
     };
+};
+
+
+
+function changeListener(itemDivToOpen, itemObject) {
+    document.getElementById("details").addEventListener("change", applyChangedDetails);
+    
+
+    function applyChangedDetails() {
+        const description = document.getElementById("description");
+        const dueDate = document.getElementById("dueDate");
+        const priority = document.getElementById("priority");
+        
+        itemDivToOpen.classList.remove("low", "mid", "high");
+        itemDivToOpen.classList.add(priority.value);
+        
+        itemObject.description = description.value;
+        itemObject.dueDate = dueDate.value;
+        itemObject.priority = priority.value;
+        
+        
+        closeItemDetails(itemDivToOpen);
+        populateItemDetails(itemDivToOpen, itemObject);
+    };
+    
 
 };
 
-export {initialDomLoader, fillCustomProjects, fillContent, removeHighLight, addNewProjectPopUp, addNewItemName, toggleNav, openItemDetails};
+
+    export {initialDomLoader, fillCustomProjects, fillContent, removeHighLight, addNewProjectPopUp, addNewItemName, toggleNav, openItemDetails};
