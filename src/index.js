@@ -5,28 +5,50 @@ import { ToDoObjectFactory } from "./toDoObject";
 import {initialDomLoader, fillCustomProjects, fillContent, addNewProjectPopUp, addNewItemName, removeHighLight, toggleNav, openItemDetails} from "./DomLoader";
 import {findProject} from "./EventListeners";
 
+//  get projects from localStorage. if there's no projects already, make some example projects
+const getProjects = () => {     
+
+    if (!localStorage.length) {     //making example lists and items
+        
+
+        projectList.add(ProjectFactory("Today"));
+        projectList.add(ProjectFactory("This Week"));
+
+        projectList.list[0].addItem(ToDoObjectFactory("do homework"));
+        projectList.list[0].addItem(ToDoObjectFactory("pingpong"));
+        projectList.list[0].addItem(ToDoObjectFactory("groceries"));
+        projectList.list[0].addItem(ToDoObjectFactory("watch a movie"));
+        projectList.list[0].addItem(ToDoObjectFactory("blabla"));
+        projectList.list[0].addItem(ToDoObjectFactory("blopblip"));
+
+        projectList.list[1].addItem(ToDoObjectFactory("bingo"));
+        projectList.list[1].addItem(ToDoObjectFactory("bango"));
+        return ; 
+    };
+
+    
+    for (let i = 0; i < localStorage.length; i++) {
+        
+        projectList.add(ProjectFactory(localStorage.key(i)));
+        const insertedProject = projectList.list.find(e => e.name === localStorage.key(i));
+
+        const itemsToBeInserted = JSON.parse(localStorage.getItem(localStorage.key(i)));
+
+        insertedProject.toDoItems.push(...itemsToBeInserted);
+
+    };
+    
+};
+
+getProjects();
 
 
+//put all projects and their items(including properties) in localstorage. called at the end of delegateClick()
+function setProjects() {        
+    localStorage.clear();
+    projectList.list.forEach(e => localStorage.setItem(e.name, JSON.stringify(e.toDoItems))); 
+};
 
-//making example lists and items
-
-projectList.add(ProjectFactory("Today"));
-projectList.add(ProjectFactory("This Week"));
-
-
-projectList.list[0].addItem(ToDoObjectFactory("do homework"));
-projectList.list[0].addItem(ToDoObjectFactory("pingpong"));
-projectList.list[0].addItem(ToDoObjectFactory("groceries"));
-projectList.list[0].addItem(ToDoObjectFactory("watch a movie"));
-projectList.list[0].addItem(ToDoObjectFactory("blabla"));
-projectList.list[0].addItem(ToDoObjectFactory("blopblip"));
-
-
-projectList.list[1].addItem(ToDoObjectFactory("bingo"));
-projectList.list[1].addItem(ToDoObjectFactory("bango"));
-
-
-console.log(projectList);
 
 
 //loading dom
@@ -42,8 +64,6 @@ fillContent(projectList.list[0]);
 document.addEventListener("click", delegateClick);
 
 function delegateClick(e) {
-    
-    console.log(e.target);
 
     if (e.target.id === "logo") {
         toggleNav();
@@ -61,7 +81,7 @@ function delegateClick(e) {
         const currentProject = document.getElementsByClassName("selected");
         const clickedProject = findProject(projectList.list, e.target.id);
         removeHighLight(currentProject);
-        return fillContent(clickedProject);
+        fillContent(clickedProject);
     };
 
     if (e.target.classList[0] === "addItem") {  //if clicked the + item button
@@ -71,7 +91,7 @@ function delegateClick(e) {
         if (!itemName) return;
         project.addItem(ToDoObjectFactory(itemName)); 
         console.log(project);
-        return fillContent(project);
+        fillContent(project);
     };
 
     if (e.target.classList[0] === "removeButton") { //if clicked the ❌ button
@@ -82,7 +102,7 @@ function delegateClick(e) {
         const itemToBeRemoved = findProject(project.toDoItems, itemName);
 
         project.removeItem(itemToBeRemoved);
-        return fillContent(project);
+        fillContent(project);
     };
 
     if (e.target.classList[0] === "iButton") {  //if clicked on info button
@@ -99,8 +119,8 @@ function delegateClick(e) {
         
     };
 
+    setProjects();
+    console.log(localStorage);
+    console.log(projectList.list);
+
 };
-
-
-
-

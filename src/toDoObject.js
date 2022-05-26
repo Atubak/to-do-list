@@ -2,7 +2,7 @@ export const ToDoObjectFactory = (itemName)=> {
     let done = false;
     let name = itemName;
     let description = "";
-    let dueDate;
+    let dueDate = "";
     let priority = "low";
 
     function changeName(newTitle) {

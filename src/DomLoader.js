@@ -39,7 +39,7 @@ function fillCustomProjects(projectListArray) {   //populates custom projects in
         div.id = e.name;
         div.textContent = e.name;
         container.insertBefore(div, container.lastElementChild);
-        
+
         const br = document.createElement("br");
         div.insertAdjacentElement("afterend", br);
     })
@@ -74,7 +74,7 @@ function fillItemContainer(itemArray) { //creates a div to put the to do item in
         itemDiv.classList.add(e.priority);
         itemDiv.innerHTML = `
             <div class="generalInfo">
-                <input type="checkbox" ${e.done == true ? "checked" : ""}>
+                <input type="checkbox" class="checkbox" ${e.done == true ? "checked" : ""}>
                 <div class="itemTitle">${e.name}</div>
                 <div class="infoAndRemove">
                     <div class="iButton">ⓘ</div>
@@ -90,6 +90,16 @@ function fillItemContainer(itemArray) { //creates a div to put the to do item in
     return div;
 };
 
+function checkboxListener(project) {
+    document.getElementById("itemContainer").addEventListener("change", changeDoneProperty);
+
+    function changeDoneProperty(e) {
+        const itemName = e.target.nextElementSibling.textContent;
+        const itemObject = project.toDoItems.find(e => e.name === itemName);
+        itemObject.done ? itemObject.done = false : itemObject.done = true;
+    }
+};
+
 
 
 function fillContent(project) {     //combines 
@@ -103,6 +113,7 @@ function fillContent(project) {     //combines
     currentProjectDiv.appendChild(itemContainerDiv);    
     
     
+    checkboxListener(project);
     projectNameSelector(project.name);
 };
 
