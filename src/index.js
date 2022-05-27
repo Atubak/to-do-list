@@ -112,15 +112,22 @@ function delegateClick(e) {
         const itemDiv = e.target.parentElement.parentElement.parentElement;
         const itemToBeExpanded = findProject(project.toDoItems, itemDiv.getElementsByClassName("itemTitle")[0].textContent);
         
-        
-        // console.log(itemDiv);
-        
         openItemDetails(itemDiv, itemToBeExpanded);
         
     };
 
-    setProjects();
-    console.log(localStorage);
-    console.log(projectList.list);
+    if (e.target.id === "plus") {
+        const projectName = document.querySelector("h1").textContent;
+        projectList.remove(projectName);      
 
+        if (projectList.list.length === 0) {
+            document.querySelector(`#${projectName}`).remove();
+        }
+
+        fillCustomProjects(projectList.list);
+        fillContent(projectList.list[projectList.list.length -1]);
+
+    };
+
+    setProjects();
 };

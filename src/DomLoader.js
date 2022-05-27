@@ -4,7 +4,7 @@ function initialDomLoader() {
     <header>
         <div id="logo">𝕋</div>
         <div id="title">To Do List</div>
-        <div id="plus">+</div>
+        <div id="plus">x</div>
     </header>
 
     <div id="content">
