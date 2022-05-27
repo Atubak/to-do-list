@@ -65,6 +65,8 @@ document.addEventListener("click", delegateClick);
 
 function delegateClick(e) {
 
+    console.log(e.target);
+
     if (e.target.id === "logo") {
         toggleNav();
     };
@@ -117,17 +119,16 @@ function delegateClick(e) {
     };
 
     if (e.target.id === "plus") {
+        console.log(localStorage); 
         const projectName = document.querySelector("h1").textContent;
+         
         projectList.remove(projectName);      
-
-        if (projectList.list.length === 0) {
-            document.querySelector(`#${projectName}`).remove();
-        }
-
+        
         fillCustomProjects(projectList.list);
         fillContent(projectList.list[projectList.list.length -1]);
 
     };
 
     setProjects();
+    console.log(projectList.list)
 };
